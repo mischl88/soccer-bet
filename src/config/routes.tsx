@@ -1,5 +1,5 @@
 import { Icon } from "@chakra-ui/react";
-import { MdHome, MdLock } from "react-icons/md";
+import { MdHome } from "react-icons/md";
 
 import { IRoute } from "@/types/navigation";
 
@@ -12,8 +12,32 @@ export const ROUTES = {
 
 const routes: IRoute[] = [
   {
-    name: "Main Dashboard",
+    name: "Dashboard",
     layout: "/",
+    path: "",
+    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
+  },
+  {
+    name: "My Scores",
+    layout: "/soccer",
+    path: "/my-scores",
+    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
+  },
+  {
+    name: "Matches",
+    layout: "/soccer",
+    path: "/matches",
+    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
+  },
+  {
+    name: "Ranking",
+    layout: "/soccer",
+    path: "/ranking",
+    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
+  },
+  {
+    name: "Users",
+    layout: "/users",
     path: "",
     icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
   },
