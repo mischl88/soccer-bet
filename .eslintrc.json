@@ -1,3 +1,79 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "prefer-const": ["error", { "destructuring": "all" }],
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "parent",
+          "internal",
+          "sibling",
+          "index",
+          "object"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "next/*",
+            "group": "builtin",
+            "position": "after"
+          },
+          {
+            "pattern": "react*",
+            "group": "builtin",
+            "position": "after"
+          },
+          {
+            "pattern": "chakra-ui*",
+            "group": "builtin",
+            "position": "after"
+          },
+          {
+            "pattern": "lodash/*",
+            "group": "builtin",
+            "position": "after"
+          },
+          {
+            "pattern": "@/components/**",
+            "group": "sibling",
+            "position": "after"
+          },
+          {
+            "pattern": "@/types/**",
+            "group": "sibling",
+            "position": "after"
+          },
+          {
+            "pattern": "@/hooks/**",
+            "group": "sibling",
+            "position": "after"
+          },
+          {
+            "pattern": "@/config/**",
+            "group": "sibling",
+            "position": "after"
+          },
+          {
+            "pattern": "@/utils/**",
+            "group": "sibling",
+            "position": "after"
+          },
+          {
+            "pattern": "./*",
+            "group": "object",
+            "position": "after"
+          },
+          {
+            "pattern": "./styles*",
+            "group": "object",
+            "position": "after"
+          }
+        ],
+        "newlines-between": "always",
+        "pathGroupsExcludedImportTypes": []
+      }
+    ]
+  }
 }
