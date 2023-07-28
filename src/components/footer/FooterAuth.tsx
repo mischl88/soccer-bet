@@ -1,3 +1,5 @@
+"use client";
+
 import { Flex, Text, useColorModeValue } from '@chakra-ui/react';
 
 export default function Footer(props: { [x: string]: any }) {

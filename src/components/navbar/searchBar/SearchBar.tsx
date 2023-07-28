@@ -1,3 +1,5 @@
+"use client";
+
 import { PropsWithChildren } from "react";
 
 import { IconButton, Input, InputGroup, InputLeftElement, useColorModeValue } from "@chakra-ui/react";

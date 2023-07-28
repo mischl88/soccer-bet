@@ -1,17 +1,17 @@
-import { Box, Flex, Stack } from '@chakra-ui/react';
+"use client";
+import { Box, Flex, Stack } from "@chakra-ui/react";
 
-import { IRoute } from '@/types/navigation';
+import { IRoute } from "@/types/navigation";
 
-import Brand from './Brand';
-import Links from './Links';
+import Brand from "./Brand";
+import Links from "./Links";
 
 interface SidebarContentProps {
   routes: IRoute[];
 }
 
 function SidebarContent({ routes }: SidebarContentProps) {
-
-return (
+  return (
     <Flex direction="column" height="100%" pt="25px" borderRadius="30px">
       <Brand />
       <Stack direction="column" mt="8px" mb="auto">
