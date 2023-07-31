@@ -12,7 +12,7 @@ import InputField from "@/components/form/Input";
 
 import { ROUTES } from "@/config/routes";
 
-export default function ForgotPasswordForm(props: { [x: string]: any }) {
+export default function ForgotPasswordForm() {
   const formik = useFormik({
     initialValues: {
       email: "",

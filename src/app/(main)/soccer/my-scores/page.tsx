@@ -1,8 +1,8 @@
+import MyScoresView from "@/views/myScores/MyScoresView";
+
 export default async function MyScores() {
 
   return (
-    <>
-      <h1>MyScores</h1>
-    </>
+    <MyScoresView data={[]} />
   );
 }

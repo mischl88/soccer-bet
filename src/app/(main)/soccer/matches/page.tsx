@@ -1,8 +1,8 @@
+import MatchesView from "@/views/matches/MatchesView";
+
 export default async function Matches() {
 
   return (
-    <>
-      <h1>Matches</h1>
-    </>
+    <MatchesView data={[]} />
   );
 }

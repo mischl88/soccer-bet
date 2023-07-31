@@ -2,7 +2,13 @@
 
 import { PropsWithChildren } from "react";
 
-import { IconButton, Input, InputGroup, InputLeftElement, useColorModeValue } from "@chakra-ui/react";
+import {
+  IconButton,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
 interface SearchBarProps extends PropsWithChildren {
@@ -10,8 +16,6 @@ interface SearchBarProps extends PropsWithChildren {
   background?: string;
   placeholder?: string;
   borderRadius?: string | number;
-
-  [x: string]: any;
 }
 
 export function SearchBar({

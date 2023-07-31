@@ -4,6 +4,7 @@ export interface IRoute {
   name: string;
   layout: string;
   icon: ReactComponentElement | string;
-  secondary?: boolean;
   path: string;
+  show: boolean;
+  children?: (Omit<IRoute, "icon"> & { icon?: ReactComponentElement | string | undefined })[];
 }
