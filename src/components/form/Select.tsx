@@ -20,6 +20,7 @@ export default function SelectField({ id, label, options, ...props }: SelectFiel
       </FormLabel>
       <Select
         id={id}
+        variant="main"
         fontSize="sm"
         mb="24px"
         size="lg"

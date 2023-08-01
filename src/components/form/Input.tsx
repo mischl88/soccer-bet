@@ -11,7 +11,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-interface InputFieldProps extends InputProps {
+export interface InputFieldProps extends InputProps {
   id: string;
   label: string;
   onIconClick?: () => void;
@@ -39,6 +39,7 @@ export default function InputField({ id, label, onIconClick, icon, ...props }: I
         fontSize="sm"
         ms={{ base: "0px", md: "0px" }}
         fontWeight="500"
+        mb="24px"
         size="lg"
         {...props}
       />

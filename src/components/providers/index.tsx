@@ -13,11 +13,11 @@ export default function Providers({ children }: PropsWithChildren) {
 
   return (
     <CacheProvider>
-      <ChakraProvider theme={theme}>
+      <ChakraProvider theme={theme} toastOptions={{ defaultOptions: { position: "bottom-right" } }}>
         <SidebarContext.Provider
           value={{
             toggleSidebar,
-            setToggleSidebar
+            setToggleSidebar,
           }}
         >
           {children}

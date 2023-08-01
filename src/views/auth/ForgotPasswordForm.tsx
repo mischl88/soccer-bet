@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 
-import { Button, Flex, FormControl, Icon, Text } from "@chakra-ui/react";
+import { Flex, FormControl, Icon, Text } from "@chakra-ui/react";
 import { FaChevronLeft } from "react-icons/fa";
 import { useFormik } from "formik";
 
@@ -9,6 +9,7 @@ import Wrapper from "@/views/auth/Wrapper";
 
 import ClientOnly from "@/components/clientOnly";
 import InputField from "@/components/form/Input";
+import CustomButton from "@/components/CustomButton";
 
 import { ROUTES } from "@/config/routes";
 
@@ -35,10 +36,7 @@ export default function ForgotPasswordForm() {
                         onChange={formik.handleChange}
                         value={formik.values.email} />
 
-            <Button type="submit" fontSize="sm" variant="brand" fontWeight="500" w="100%" h="50"
-                    mb="24px">
-              Recover Password
-            </Button>
+            <CustomButton label="Recover Password" w="100%" />
           </ClientOnly>
         </FormControl>
       </form>

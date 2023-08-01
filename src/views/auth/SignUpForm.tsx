@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { useState } from "react";
 
-import { Button, Flex, FormControl, Text, useColorModeValue } from "@chakra-ui/react";
+import { Flex, FormControl, Text, useColorModeValue } from "@chakra-ui/react";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { useFormik } from "formik";
@@ -12,10 +12,11 @@ import Wrapper from "@/views/auth/Wrapper";
 
 import ClientOnly from "@/components/clientOnly";
 import InputField from "@/components/form/Input";
+import CustomButton from "@/components/CustomButton";
 
 import { ROUTES } from "@/config/routes";
 
-export default function SignUpForm(props: { [x: string]: any }) {
+export default function SignUpForm() {
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
   const [show, setShow] = useState(false);
@@ -64,10 +65,7 @@ export default function SignUpForm(props: { [x: string]: any }) {
                         onChange={formik.handleChange}
                         value={formik.values.confirmPassword} />
 
-            <Button type="submit" fontSize="sm" variant="brand" fontWeight="500" w="100%" h="50"
-                    mb="24px">
-              Sign Up
-            </Button>
+            <CustomButton label="Sign Up" w="100%" />
           </ClientOnly>
         </FormControl>
       </form>

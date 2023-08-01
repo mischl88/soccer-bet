@@ -6,12 +6,13 @@ import {
   IconButton,
   Input,
   InputGroup,
+  InputGroupProps,
   InputLeftElement,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
-interface SearchBarProps extends PropsWithChildren {
+interface SearchBarProps extends InputGroupProps, PropsWithChildren {
   variant?: string;
   background?: string;
   placeholder?: string;

@@ -5,11 +5,11 @@ import Wrapper from "@/components/form/Wrapper";
 import NumberInput from "@/components/form/NumberInput";
 import Select from "@/components/form/Select";
 
-interface ScoreFormView {
+interface ScoreFormProps {
   scoreId: number;
 }
 
-export default function ScoreForm({ scoreId }: ScoreFormView) {
+export default function ScoreForm({ scoreId }: ScoreFormProps) {
   const formik = useFormik({
     initialValues: {
       match: "",
@@ -25,7 +25,7 @@ export default function ScoreForm({ scoreId }: ScoreFormView) {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Wrapper>
-        <Select id="match" label="match" options={[]} onChange={formik.handleChange}
+        <Select id="match" label="Match" options={[]} onChange={formik.handleChange}
                 value={formik.values.match} />
         <NumberInput id="homeScore" label="Home Score"
                      inputProps={{ isRequired: true }}

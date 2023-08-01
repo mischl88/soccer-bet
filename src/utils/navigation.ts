@@ -2,7 +2,6 @@ import { IRoute } from "@/types/navigation";
 
 import routes from "@/config/routes";
 
-
 export const findCurrentRoute = (pathname: string): IRoute | undefined => {
   return routes.find(
     (route) =>

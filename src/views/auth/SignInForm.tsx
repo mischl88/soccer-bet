@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState } from "react";
 
 import {
-  Button,
   Checkbox,
   Flex,
   FormControl,
@@ -20,10 +19,11 @@ import Wrapper from "@/views/auth/Wrapper";
 
 import ClientOnly from "@/components/clientOnly";
 import InputField from "@/components/form/Input";
+import CustomButton from "@/components/CustomButton";
 
 import { ROUTES } from "@/config/routes";
 
-export default function SignInForm(props: { [x: string]: any }) {
+export default function SignInForm() {
   const textColor = useColorModeValue("navy.700", "white");
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
@@ -87,10 +87,7 @@ export default function SignInForm(props: { [x: string]: any }) {
                 </Text>
               </Link>
             </Flex>
-            <Button type="submit" fontSize="sm" variant="brand" fontWeight="500" w="100%" h="50"
-                    mb="24px">
-              Sign In
-            </Button>
+            <CustomButton label="Sign In" w="100%" />
           </ClientOnly>
         </FormControl>
       </form>

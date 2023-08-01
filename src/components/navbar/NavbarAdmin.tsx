@@ -80,8 +80,8 @@ export default function AdminNavbar({ brandText }: AdminNavbarProps) {
         <Box mb={{ sm: "8px", md: "0px" }}>
           <Breadcrumb mb="10px">
             <BreadcrumbItem color={secondaryText} fontSize="sm">
-              <BreadcrumbLink href="#" color={secondaryText}>
-                Pages
+              <BreadcrumbLink href="/" color={secondaryText}>
+                Home
               </BreadcrumbLink>
             </BreadcrumbItem>
 

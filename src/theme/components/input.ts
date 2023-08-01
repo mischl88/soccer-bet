@@ -117,10 +117,13 @@ export const inputStyles = {
       variants: {
         main: (props: StyleFunctionProps) => ({
           field: {
-            bg: mode("transparent", "navy.800")(props),
+            bg: "transparent",
             border: "1px solid",
             color: "secondaryGray.600",
-            borderColor: mode("secondaryGray.100", "whiteAlpha.100")(props),
+            borderColor: mode(
+              "secondaryGray.100",
+              "rgba(135, 140, 189, 0.3)",
+            )(props),
             borderRadius: "16px",
             _placeholder: { color: "secondaryGray.600" },
           },
@@ -188,7 +191,7 @@ export const inputStyles = {
             _placeholder: { color: "secondaryGray.600" },
           },
         }),
-        authSecondary: (props: StyleFunctionProps) => ({
+        authSecondary: () => ({
           field: {
             bg: "transparent",
             border: "1px solid",
@@ -198,7 +201,7 @@ export const inputStyles = {
             _placeholder: { color: "secondaryGray.600" },
           },
         }),
-        search: (props: StyleFunctionProps) => ({
+        search: () => ({
           field: {
             border: "none",
             py: "11px",
