@@ -10,6 +10,7 @@ export const ROUTES = {
   FORGOT_PASSWORD: "/auth/forgot-password",
   EDIT_SCORE: "/soccer/my-scores",
   EDIT_MATCH: "/soccer/matches",
+  EDIT_USER: "/users",
 };
 
 const routes: IRoute[] = [

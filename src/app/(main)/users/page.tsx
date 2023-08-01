@@ -1,8 +1,8 @@
+import UsersView from "@/views/users/View";
+
 export default async function Users() {
 
   return (
-    <>
-      <h1>Users</h1>
-    </>
+    <UsersView data={[]} />
   );
 }

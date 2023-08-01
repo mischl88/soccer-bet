@@ -1,4 +1,4 @@
-import ScoreForm from "@/views/myScores/ScoreForm";
+import ScoreForm from "@/views/myScores/Form";
 
 interface EditScoreProps {
   params: {
@@ -7,7 +7,6 @@ interface EditScoreProps {
 }
 
 export default async function EditScore({ params }: EditScoreProps) {
-
   return (
     <ScoreForm scoreId={Number(params.id)} />
   );

@@ -1,4 +1,4 @@
-import MatchForm from "@/views/matches/MatchForm";
+import MatchForm from "@/views/matches/Form";
 
 interface EditMatchProps {
   params: {
