@@ -6,8 +6,8 @@ import Link from 'next/link';
 import { toast } from 'react-toastify';
 
 import { useFormik, FormikProvider } from 'formik';
+import { Auth } from 'aws-amplify';
 
-import axios from '@/lib/axios';
 import { useAuthContext } from '@/contexts/Auth';
 
 import Wrapper from '@/views/auth/Wrapper';
@@ -16,26 +16,25 @@ import Button from '@/components/Button';
 import PasswordInput from '@/components/Form/PasswordInput';
 import Input from '@/components/Form/Input';
 
-import { useRequest } from '@/hooks/useRequest';
-
-import { API_ROUTES, ROUTES } from '@/config/routes';
+import { ROUTES } from '@/config/routes';
 
 export default function SignInForm() {
   const { push } = useRouter();
   const { setUser } = useAuthContext();
-  const { fetch } = useRequest(API_ROUTES.ME, { enabled: false });
 
   const formik = useFormik({
     initialValues: {
-      email: '',
+      username: '',
       password: '',
       rememberMe: false,
     },
-    onSubmit: async (values) => {
+    onSubmit: async ({ password, username }) => {
       try {
-        await axios.post(API_ROUTES.SIGN_IN, values);
-        const response = await (fetch && fetch());
-        setUser(response);
+        const user = await Auth.signIn({
+          username,
+          password,
+        });
+        setUser(user);
         push('/');
       } catch (error: any) {
         toast.error(error.message);
@@ -49,10 +48,9 @@ export default function SignInForm() {
         <form onSubmit={formik.handleSubmit}>
           <div className="mb-4">
             <Input
-              label="Email"
-              type="email"
-              name="email"
-              placeholder="Enter your email"
+              label="Username"
+              name="username"
+              placeholder="Enter your username"
               icon="mdi:envelope-outline"
             />
           </div>

@@ -26,18 +26,18 @@ export default function Providers({
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-  const { data: userData, isLoading } = useRequest<User>(API_ROUTES.ME);
-
-  useEffect(() => {
-    if (!user && userData) {
-      setUser(userData);
-      pathname.includes('auth') && push('/');
-    }
-  }, [userData, push, pathname, user]);
-
-  if (!isLoading && !userData && redirectOnMissingUser) {
-    redirect(ROUTES.SIGN_IN);
-  }
+  // const { data: userData, isLoading, error } = useRequest<User>(API_ROUTES.ME);
+  //
+  // useEffect(() => {
+  //   if (!user && userData) {
+  //     setUser(userData);
+  //     pathname.includes('auth') && push('/');
+  //   }
+  // }, [userData, push, pathname, user]);
+  //
+  // if (!isLoading && !userData && redirectOnMissingUser) {
+  //   redirect(ROUTES.SIGN_IN);
+  // }
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
@@ -47,13 +47,7 @@ export default function Providers({
           setSidebarOpen,
         }}
       >
-        {!isLoading ? (
-          children
-        ) : (
-          <div className="w-screen h-screen items-center flex justify-center">
-            <Loader size="lg" />
-          </div>
-        )}
+        {children}
       </SidebarContext.Provider>
     </AuthContext.Provider>
   );

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 
 import { useFormik, FormikProvider } from 'formik';
+import { Auth } from 'aws-amplify';
 
 import Wrapper from '@/views/auth/Wrapper';
 
@@ -13,18 +14,11 @@ import InputField from '@/components/Form/Input';
 import Button from '@/components/Button';
 import PasswordInput from '@/components/Form/PasswordInput';
 
-import { useMutation } from '@/hooks/useMutation';
-
-import { API_ROUTES, ROUTES } from '@/config/routes';
+import { ROUTES } from '@/config/routes';
 
 export default function SignUpForm() {
   const { push } = useRouter();
-  const { mutate: signUp } = useMutation(API_ROUTES.SIGN_UP, undefined, {
-    onSuccess: () => push('/'),
-    onError: (message) => {
-      toast.error(message);
-    },
-  });
+
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -32,8 +26,9 @@ export default function SignUpForm() {
       password: '',
       confirmPassword: '',
     },
-    onSubmit: async (values) => {
-      await signUp(values);
+    onSubmit: async ({ email, ...values }) => {
+      await Auth.signUp({ ...values, attributes: { email } });
+      push(ROUTES.SIGN_IN);
     },
   });
 
@@ -44,9 +39,10 @@ export default function SignUpForm() {
           <div className="mb-4">
             <InputField
               label="Name"
+              name="username"
               onChange={formik.handleChange}
               value={formik.values.username}
-              placeholder="Enter your full name"
+              placeholder="Enter your username"
               icon="tabler:user"
             />
           </div>

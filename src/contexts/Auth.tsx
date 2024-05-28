@@ -1,5 +1,7 @@
 import { createContext, Dispatch, SetStateAction, useContext } from 'react';
 
+import { CognitoUser } from 'amazon-cognito-identity-js';
+
 export interface User {
   id: string;
   email: string;
@@ -7,8 +9,8 @@ export interface User {
 }
 
 interface AuthContextType {
-  user: User | null;
-  setUser: Dispatch<SetStateAction<User | null>>;
+  user: CognitoUser | null;
+  setUser: Dispatch<SetStateAction<CognitoUser | null>>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
