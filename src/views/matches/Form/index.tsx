@@ -31,42 +31,31 @@ export default function MatchForm({ matchId }: MatchFormProps) {
     <form onSubmit={formik.handleSubmit}>
       <Wrapper>
         <InputDatePicker
-          id="matchDate"
+          name="matchDate"
           label="Match Date"
-          onChange={(value) => formik.setFieldValue('matchDate', value)}
           value={formik.values.matchDate}
         />
         <Input
-          id="group"
+          name="group"
           label="Group"
           onChange={formik.handleChange}
           value={formik.values.group}
         />
-        <Select
-          id="teamHome"
-          label="Team Home"
-          isRequired
-          options={[]}
-          onChange={formik.handleChange}
-          value={formik.values.teamHome}
-        />
+        <Select name="teamHome" label="Team Home" options={[]} />
         <Input
           type="number"
           label="Home Score"
-          inputProps={{ isRequired: true }}
           onChange={formik.handleChange}
           value={formik.values.homeScore}
         />
         <Input
           type="number"
           label="Away Score"
-          inputProps={{ isRequired: true }}
           onChange={formik.handleChange}
           value={formik.values.awayScore}
         />
         <Select
           label="Team Away"
-          isRequired
           options={[]}
           onChange={formik.handleChange}
           value={formik.values.teamAway}

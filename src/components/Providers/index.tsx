@@ -5,7 +5,7 @@ import { redirect, usePathname, useRouter } from 'next/navigation';
 import { PropsWithChildren, useEffect, useState } from 'react';
 
 import { SidebarContext } from '@/contexts/Sidebar';
-import { AuthContext, User } from '@/contexts/Auth';
+import { AuthContext, AuthContextType } from '@/contexts/Auth';
 
 import Loader from '@/components/Loader';
 
@@ -25,7 +25,7 @@ export default function Providers({
   const { push } = useRouter();
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<AuthContextType['user'] | null>(null);
   // const { data: userData, isLoading, error } = useRequest<User>(API_ROUTES.ME);
   //
   // useEffect(() => {

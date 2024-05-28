@@ -8,7 +8,7 @@ export interface User {
   username: string;
 }
 
-interface AuthContextType {
+export interface AuthContextType {
   user: CognitoUser | null;
   setUser: Dispatch<SetStateAction<CognitoUser | null>>;
 }
