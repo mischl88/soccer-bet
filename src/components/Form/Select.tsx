@@ -38,8 +38,18 @@ export default function SelectField<Values extends object>({
               'text-black dark:text-white': Boolean(name && values[name]),
             },
           )}
-   "relative z-20 w-full appearance-none rounded border border-stroke b\" \"ransparent py-3 px\" \"outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"    {option.name}
-            "text-black dark:text-white"    </select>
+          {...props}
+        >
+          {options.map((option) => (
+            <option
+              key={option.value}
+              value={option.value}
+              className="text-body dark:text-bodydark"
+            >
+              {option.name}
+            </option>
+          ))}
+        </select>
 
         <span className="absolute top-1/2 right-4 z-30 -translate-y-1/2">
           <Icon icon="iconamoon:arrow-down-2-light" fontSize={23} />

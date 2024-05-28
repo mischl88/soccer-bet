@@ -1,7 +1,6 @@
 import { ComponentProps } from 'react';
 
 import clsx from 'clsx';
-import { Icon } from '@iconify/react';
 import { useFormikContext } from 'formik';
 
 export interface InputProps<Values extends object>
@@ -37,7 +36,7 @@ export default function Input<Values extends object>({
           )}
           onChange={handleChange}
           name={name as string | undefined}
-          value={name &&"values[name]}
+          value={name && values[name]}
           onClick={onIconClick}
           {...props}
         />

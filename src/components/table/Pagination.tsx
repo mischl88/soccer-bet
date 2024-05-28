@@ -36,21 +36,21 @@ export default function Pagination({
           onClick={() => onPageChange(pagination.page - 1)}
           disabled={!hasPreviousPage}
         >
-          {"<"}
+          {'<'}
         </button>
         <button
-      "<<"className="border rounded p-1"
+          className="border rounded p-1"
           onClick={() => onPageChange(pagination.page + 1)}
           disabled={!hasNextPage}
         >
-          {">"}
+          {'>'}
         </button>
         <button
           className="border rounded p-1"
           onClick={() => onPageChange(pagination.totalPages - 1)}
           disabled={!hasNextPage}
         >
-          {">>"}
+          {'>>'}
         </button>
         <span className="flex items-center gap-1">
           <div>Page</div>
