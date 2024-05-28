@@ -1,84 +1,95 @@
-"use client";
-import Link from "next/link";
+'use client';
 
-import { useState } from "react";
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-import { Flex, FormControl, Text, useColorModeValue } from "@chakra-ui/react";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { RiEyeCloseLine } from "react-icons/ri";
-import { useFormik } from "formik";
+import { toast } from 'react-toastify';
 
-import Wrapper from "@/views/auth/Wrapper";
+import { useFormik, FormikProvider } from 'formik';
 
-import ClientOnly from "@/components/clientOnly";
-import InputField from "@/components/form/Input";
-import CustomButton from "@/components/CustomButton";
+import Wrapper from '@/views/auth/Wrapper';
 
-import { ROUTES } from "@/config/routes";
+import InputField from '@/components/Form/Input';
+import Button from '@/components/Button';
+import PasswordInput from '@/components/Form/PasswordInput';
+
+import { useMutation } from '@/hooks/useMutation';
+
+import { API_ROUTES, ROUTES } from '@/config/routes';
 
 export default function SignUpForm() {
-  const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
-  const textColorBrand = useColorModeValue("brand.500", "white");
-  const [show, setShow] = useState(false);
-
+  const { push } = useRouter();
+  const { mutate: signUp } = useMutation(API_ROUTES.SIGN_UP, undefined, {
+    onSuccess: () => push('/'),
+    onError: (message) => {
+      toast.error(message);
+    },
+  });
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
-      confirmPassword: "",
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      await signUp(values);
     },
   });
 
-  const handleClick = () => {
-    setShow((prevState) => !prevState);
-  };
-
   return (
-    <Wrapper
-      header="Sign Up"
-      subHeader="Enter your email and password to sign up!">
-      <form onSubmit={formik.handleSubmit}>
-        <FormControl>
-          <ClientOnly>
-            <InputField id="email" label="Email" autoComplete="email" variant="auth" type="email"
-                        mb="24px"
-                        placeholder="mail@example.com"
-                        onChange={formik.handleChange}
-                        value={formik.values.email} />
+    <Wrapper header="Sign Up">
+      <FormikProvider value={formik}>
+        <form onSubmit={formik.handleSubmit}>
+          <div className="mb-4">
+            <InputField
+              label="Name"
+              onChange={formik.handleChange}
+              value={formik.values.username}
+              placeholder="Enter your full name"
+              icon="tabler:user"
+            />
+          </div>
 
-            <InputField id="password" label="Password" variant="auth"
-                        type={show ? "text" : "password"} mb="24px"
-                        placeholder="Min. 8 characters"
-                        onIconClick={handleClick}
-                        icon={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                        onChange={formik.handleChange}
-                        value={formik.values.password} />
+          <div className="mb-4">
+            <InputField
+              label="Email"
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              icon="mdi:envelope-outline"
+            />
+          </div>
 
-            <InputField id="confirmPassword" label="Confirm Password" variant="auth"
-                        type={show ? "text" : "password"} mb="24px"
-                        placeholder="Min. 8 characters"
-                        onIconClick={handleClick}
-                        icon={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                        onChange={formik.handleChange}
-                        value={formik.values.confirmPassword} />
+          <div className="mb-4">
+            <PasswordInput
+              label="Password"
+              name="password"
+              placeholder="Enter your password"
+            />
+          </div>
 
-            <CustomButton label="Sign Up" w="100%" />
-          </ClientOnly>
-        </FormControl>
-      </form>
-      <Flex flexDirection="column" justifyContent="center" alignItems="start" maxW="100%" mt="0px">
-        <Text color={textColorDetails} fontWeight="400" fontSize="14px">
-          Already have an account?
-          <Link href={ROUTES.SIGN_IN}>
-            <Text color={textColorBrand} as="span" ms="5px" fontWeight="500">
-              Sign In
-            </Text>
-          </Link>
-        </Text>
-      </Flex>
+          <div className="mb-6">
+            <PasswordInput
+              label="Re-type Password"
+              placeholder="Re-enter your password"
+              name="confirmPassword"
+            />
+          </div>
+
+          <div className="mb-5">
+            <Button type="submit" label="Create account" />
+          </div>
+          <div className="mt-6 text-center">
+            <p>
+              Already have an account?{' '}
+              <Link href={ROUTES.SIGN_IN} className="text-primary">
+                Sign in
+              </Link>
+            </p>
+          </div>
+        </form>
+      </FormikProvider>
     </Wrapper>
   );
 }

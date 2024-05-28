@@ -1,14 +1,13 @@
-"use client";
-import { PaginationState } from "@tanstack/table-core";
-import { Flex } from "@chakra-ui/react";
+'use client';
+import { PaginationState } from '@tanstack/table-core';
 
-import { useColumnData } from "@/views/users/useColumnData";
+import { useColumnData } from '@/views/users/useColumnData';
 
-import Table from "@/components/table/Table";
-import { Pagination } from "@/components/table/Pagination";
-import CustomLink from "@/components/customLink";
+import Table from '@/components/table/Table';
+import { Pagination } from '@/components/table/Pagination';
+import TableWrapper from '@/components/TableWrapper';
 
-import { ROUTES } from "@/config/routes";
+import { ROUTES } from '@/config/routes';
 
 interface UsersViewProps {
   data: any[];
@@ -23,12 +22,13 @@ export default function UsersView({ data, metadata }: UsersViewProps) {
   };
 
   return (
-    <>
-      <Flex justifyContent="flex-end" mb="15px" mr="30px">
-        <CustomLink href={`${ROUTES.EDIT_USER}/add`}>Add User</CustomLink>
-      </Flex>
-      <Table columnsData={columns} tableData={data} onPaginationChange={handlePaginationChange}
-             pagination={metadata} />
-    </>
+    <TableWrapper url={`${ROUTES.EDIT_USER}/add`}>
+      <Table
+        columnsData={columns}
+        tableData={data}
+        onPaginationChange={handlePaginationChange}
+        pagination={metadata}
+      />
+    </TableWrapper>
   );
 }

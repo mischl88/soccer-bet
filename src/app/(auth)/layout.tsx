@@ -1,38 +1,33 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
-import { DM_Sans } from "next/font/google";
+import { DM_Sans } from 'next/font/google';
 
-import AuthTemplate from "@/layouts/AuthLayout";
+import AuthTemplate from '@/layouts/AuthLayout';
 
-import Providers from "@/components/providers";
+import Providers from '@/components/Providers';
 
-import "@/styles/App.css";
+import 'react-toastify/dist/ReactToastify.min.css';
+import '@/styles/App.css';
 
 const dMSans = DM_Sans({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  weight: ["400", "500", "700"],
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
+  weight: ['400', '500', '700'],
 });
 
 export const metadata = {
-  title: "SoccerBet",
-  description: "SoccerBet App",
+  title: 'SoccerBet',
+  description: 'SoccerBet App',
 };
 
-export default function AuthLayout({
-                                     children,
-                                   }: {
-  children: ReactNode
-}) {
+export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-    <body className={dMSans.className}>
-    <Providers>
-      <AuthTemplate illustrationBackground={'/img/istockphoto-1305369487-1024x1024.jpg'}>
-        {children}
-      </AuthTemplate>
-    </Providers>
-    </body>
+      <body className={dMSans.className}>
+        <Providers>
+          <AuthTemplate>{children}</AuthTemplate>
+        </Providers>
+      </body>
     </html>
   );
 }

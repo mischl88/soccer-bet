@@ -1,14 +1,11 @@
-import UserForm from "@/views/users/Form";
+import UserForm from '@/views/users/Form';
 
 interface EditUserProps {
   params: {
-    id: number
+    id: number;
   };
 }
 
 export default async function EditUser({ params }: EditUserProps) {
-
-  return (
-    <UserForm userId={Number(params.id)} />
-  );
+  return <UserForm userId={Number(params.id)} />;
 }

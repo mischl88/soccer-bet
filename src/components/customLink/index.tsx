@@ -1,22 +1,20 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from 'react';
 
-import { Text, TextProps, useColorModeValue } from "@chakra-ui/react";
-
-interface CustomLinkProps extends TextProps, PropsWithChildren {
+interface CustomLinkProps extends PropsWithChildren {
   href: string;
-  label?: string;
+  className?: string;
 }
 
-export default function CustomLink({ label, href, children, ...rest }: CustomLinkProps) {
-  const textColorBrand = useColorModeValue("brand.500", "white");
-
+export default function CustomLink({
+  href,
+  className,
+  children,
+}: CustomLinkProps) {
   return (
-    <Link href={href}>
-      {children ?? <Text color={textColorBrand} as="span" fontWeight="500" {...rest}>
-        {label}
-      </Text>}
+    <Link href={href} className={className}>
+      {children}
     </Link>
   );
 }

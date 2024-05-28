@@ -1,5 +1,8 @@
 {
   "extends": "next/core-web-vitals",
+  "plugins": [
+    "import"
+  ],
   "rules": {
     "prefer-const": ["error", { "destructuring": "all" }],
     "import/order": [
@@ -33,6 +36,11 @@
           {
             "pattern": "lodash/*",
             "group": "builtin",
+            "position": "after"
+          },
+          {
+            "pattern": "@/views/**",
+            "group": "sibling",
             "position": "after"
           },
           {

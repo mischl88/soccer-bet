@@ -1,106 +1,89 @@
-"use client";
-import Link from "next/link";
+'use client';
 
-import { useState } from "react";
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-import {
-  Checkbox,
-  Flex,
-  FormControl,
-  FormLabel,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { RiEyeCloseLine } from "react-icons/ri";
-import { useFormik } from "formik";
+import { toast } from 'react-toastify';
 
-import Wrapper from "@/views/auth/Wrapper";
+import { useFormik, FormikProvider } from 'formik';
 
-import ClientOnly from "@/components/clientOnly";
-import InputField from "@/components/form/Input";
-import CustomButton from "@/components/CustomButton";
+import axios from '@/lib/axios';
+import { useAuthContext } from '@/contexts/Auth';
 
-import { ROUTES } from "@/config/routes";
+import Wrapper from '@/views/auth/Wrapper';
+
+import Button from '@/components/Button';
+import PasswordInput from '@/components/Form/PasswordInput';
+import Input from '@/components/Form/Input';
+
+import { useRequest } from '@/hooks/useRequest';
+
+import { API_ROUTES, ROUTES } from '@/config/routes';
 
 export default function SignInForm() {
-  const textColor = useColorModeValue("navy.700", "white");
-  const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
-  const textColorBrand = useColorModeValue("brand.500", "white");
-  const [show, setShow] = useState(false);
+  const { push } = useRouter();
+  const { setUser } = useAuthContext();
+  const { fetch } = useRequest(API_ROUTES.ME, { enabled: false });
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       rememberMe: false,
     },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      try {
+        await axios.post(API_ROUTES.SIGN_IN, values);
+        const response = await (fetch && fetch());
+        setUser(response);
+        push('/');
+      } catch (error: any) {
+        toast.error(error.message);
+      }
     },
   });
 
-  const handleClick = () => {
-    setShow((prevState) => !prevState);
-  };
-
   return (
-    <Wrapper
-      header="Sign In"
-      subHeader="Enter your email and password to sign in!">
-      <form onSubmit={formik.handleSubmit}>
-        <FormControl>
-          <ClientOnly>
-            <InputField id="email" label="Email" autoComplete="email" variant="auth" type="email"
-                        mb="24px"
-                        placeholder="mail@example.com"
-                        onChange={formik.handleChange}
-                        value={formik.values.email} />
+    <Wrapper header="Sign In">
+      <FormikProvider value={formik}>
+        <form onSubmit={formik.handleSubmit}>
+          <div className="mb-4">
+            <Input
+              label="Email"
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              icon="mdi:envelope-outline"
+            />
+          </div>
 
-            <InputField id="password" label="Password" autoComplete="current-password"
-                        variant="auth"
-                        type={show ? "text" : "password"} mb="24px"
-                        placeholder="Min. 8 characters"
-                        onIconClick={handleClick}
-                        icon={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                        onChange={formik.handleChange}
-                        value={formik.values.password} />
+          <div className="mb-6">
+            <PasswordInput
+              label="Password"
+              name="password"
+              placeholder="Enter your password"
+            />
+          </div>
 
-            <Flex justifyContent="space-between" align="center" mb="24px">
-              <FormControl display="flex" alignItems="center">
-                <Checkbox id="rememberMe" colorScheme="brandScheme" me="10px"
-                          onChange={formik.handleChange}
-                          value={String(formik.values.rememberMe)} />
-                <FormLabel
-                  id="remember-me-field"
-                  htmlFor="rememberMe"
-                  mb="0"
-                  fontWeight="normal"
-                  color={textColor}
-                  fontSize="sm">
-                  Keep me logged in
-                </FormLabel>
-              </FormControl>
-              <Link href={ROUTES.FORGOT_PASSWORD}>
-                <Text color={textColorBrand} fontSize="sm" w="124px" fontWeight="500">
-                  Forgot password?
-                </Text>
+          <div className="mb-5">
+            <Button type="submit" label="Sign In" />
+          </div>
+
+          <div className="mt-6 flex justify-between">
+            <p>
+              <Link href={ROUTES.FORGOT_PASSWORD} className="text-primary">
+                Forgot password?
               </Link>
-            </Flex>
-            <CustomButton label="Sign In" w="100%" />
-          </ClientOnly>
-        </FormControl>
-      </form>
-      <Flex flexDirection="column" justifyContent="center" alignItems="start" maxW="100%" mt="0px">
-        <Text color={textColorDetails} fontWeight="400" fontSize="14px">
-          Not registered yet?
-          <Link href={ROUTES.SIGN_UP}>
-            <Text color={textColorBrand} as="span" ms="5px" fontWeight="500">
-              Create an Account
-            </Text>
-          </Link>
-        </Text>
-      </Flex>
+            </p>
+            <p>
+              Don’t have any account?{' '}
+              <Link href={ROUTES.SIGN_UP} className="text-primary">
+                Sign Up
+              </Link>
+            </p>
+          </div>
+        </form>
+      </FormikProvider>
     </Wrapper>
   );
 }

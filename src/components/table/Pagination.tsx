@@ -1,7 +1,7 @@
 export interface Pagination {
-  page: number,
-  limit: number,
-  totalPages: number,
+  page: number;
+  limit: number;
+  totalPages: number;
 }
 
 interface PaginationProps {
@@ -14,14 +14,13 @@ interface PaginationProps {
 }
 
 export default function Pagination({
-                                     limit,
-                                     pagination,
-                                     onPageChange,
-                                     onPageLimitChange,
-                                     hasNextPage,
-                                     hasPreviousPage,
-                                   }: PaginationProps) {
-
+  limit,
+  pagination,
+  onPageChange,
+  onPageLimitChange,
+  hasNextPage,
+  hasPreviousPage,
+}: PaginationProps) {
   return (
     <>
       <div className="flex items-center gap-2">
@@ -30,7 +29,7 @@ export default function Pagination({
           onClick={() => onPageChange(0)}
           disabled={!hasPreviousPage}
         >
-          {"<<"}
+          {'<<'}
         </button>
         <button
           className="border rounded p-1"
@@ -40,7 +39,7 @@ export default function Pagination({
           {"<"}
         </button>
         <button
-          className="border rounded p-1"
+      "<<"className="border rounded p-1"
           onClick={() => onPageChange(pagination.page + 1)}
           disabled={!hasNextPage}
         >
@@ -56,8 +55,7 @@ export default function Pagination({
         <span className="flex items-center gap-1">
           <div>Page</div>
           <strong>
-            {pagination.page + 1} of{" "}
-            {pagination.totalPages}
+            {pagination.page + 1} of {pagination.totalPages}
           </strong>
         </span>
         <span className="flex items-center gap-1">
@@ -65,7 +63,7 @@ export default function Pagination({
           <input
             type="number"
             defaultValue={pagination.page + 1}
-            onChange={e => {
+            onChange={(e) => {
               const page = e.target.value ? Number(e.target.value) - 1 : 0;
               onPageChange(page);
             }}
@@ -74,7 +72,7 @@ export default function Pagination({
         </span>
         <select
           value={limit}
-          onChange={e => {
+          onChange={(e) => {
             onPageLimitChange(Number(e.target.value));
           }}
         >
