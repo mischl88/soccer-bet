@@ -5,15 +5,18 @@ import { DM_Sans } from 'next/font/google';
 
 import AuthTemplate from '@/layouts/AuthLayout';
 
-import awsConfig from './../../amplifyconfiguration.json';
+import awsConfig from './../../aws-exports';
 
 import Providers from '@/components/Providers';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 import '@/styles/App.css';
 
-Amplify.configure({ ...awsConfig, ssr: true });
-// Auth.configure({ ...awsConfig, ssr: true });
+Amplify.configure({
+  ...awsConfig,
+  authenticationFlowType: 'USER_PASSWORD_AUTH',
+});
+Auth.configure({ ...awsConfig, authenticationFlowType: 'USER_PASSWORD_AUTH' });
 
 const dMSans = DM_Sans({
   subsets: ['latin'],

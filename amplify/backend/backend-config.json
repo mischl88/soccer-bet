@@ -1,32 +1,6 @@
 {
-  "api": {
-    "soccerbet": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "auth"
-        }
-      ],
-      "output": {
-        "authConfig": {
-          "additionalAuthenticationProviders": [],
-          "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authauth"
-            }
-          }
-        }
-      },
-      "providerPlugin": "awscloudformation",
-      "service": "AppSync"
-    }
-  },
   "auth": {
-    "auth": {
+    "soccerbetapp530cfdb7": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -39,8 +13,7 @@
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
-          "EMAIL",
-          "NICKNAME"
+          "EMAIL"
         ],
         "socialProviders": [],
         "usernameAttributes": [],

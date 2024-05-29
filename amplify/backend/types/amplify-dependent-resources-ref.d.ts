@@ -1,12 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
-  "api": {
-    "soccerbet": {
-      "GraphQLAPIEndpointOutput": "string",
-      "GraphQLAPIIdOutput": "string"
-    }
-  },
   "auth": {
-    "auth": {
+    "soccerbetapp530cfdb7": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "UserPoolArn": "string",

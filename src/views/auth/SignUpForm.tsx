@@ -40,8 +40,6 @@ export default function SignUpForm() {
             <InputField
               label="Name"
               name="username"
-              onChange={formik.handleChange}
-              value={formik.values.username}
               placeholder="Enter your username"
               icon="tabler:user"
             />
