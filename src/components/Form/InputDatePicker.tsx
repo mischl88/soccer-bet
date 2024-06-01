@@ -1,16 +1,20 @@
 import { useEffect } from 'react';
 
 import flatpickr from 'flatpickr';
+import { useFormikContext } from 'formik';
 
 import Input, { InputProps } from './Input';
 
 interface InputDatePickerProps<Values extends object>
-  extends Omit<InputProps<Values>, 'value' | 'onChange'> {}
+  extends Omit<InputProps<Values>, 'value' | 'onChange'> {
+  value: Date | null;
+}
 
 export default function InputDatePicker<Values extends object>({
   name,
   ...props
 }: InputDatePickerProps<Values>) {
+  const { handleChange, values } = useFormikContext<Values>();
   useEffect(() => {
     // Init flatpickr
     flatpickr('.form-datepicker', {
@@ -28,6 +32,8 @@ export default function InputDatePicker<Values extends object>({
   return (
     <Input
       {...props}
+      name={name as string | undefined}
+      value={name && values[name]}
       className="form-datepicker w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
       placeholder="mm/dd/yyyy"
       data-class="flatpickr-right"
