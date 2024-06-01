@@ -14,9 +14,8 @@ import '@/styles/App.css';
 
 Amplify.configure({
   ...awsConfig,
-  authenticationFlowType: 'USER_PASSWORD_AUTH',
 });
-Auth.configure({ ...awsConfig, authenticationFlowType: 'USER_PASSWORD_AUTH' });
+Auth.configure({ ...awsConfig });
 
 const dMSans = DM_Sans({
   subsets: ['latin'],

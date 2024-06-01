@@ -1,11 +1,20 @@
 export type AmplifyDependentResourcesAttributes = {
   "auth": {
-    "soccerbetapp530cfdb7": {
+    "soccerappauth": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "UserPoolArn": "string",
       "UserPoolId": "string",
       "UserPoolName": "string"
+    }
+  },
+  "function": {
+    "soccerappauthPostConfirmation": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
     }
   }
 }

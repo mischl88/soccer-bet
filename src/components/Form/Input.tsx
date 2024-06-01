@@ -2,6 +2,7 @@ import { ComponentProps } from 'react';
 
 import clsx from 'clsx';
 import { useFormikContext } from 'formik';
+import { Icon } from '@iconify/react';
 
 export interface InputProps<Values extends object>
   extends Omit<ComponentProps<'input'>, 'name'> {
@@ -37,9 +38,20 @@ export default function Input<Values extends object>({
           onChange={handleChange}
           name={name as string | undefined}
           value={name && values[name]}
-          onClick={onIconClick}
           {...props}
         />
+        {icon && (
+          <div
+            onClick={onIconClick}
+            className={clsx(
+              'absolute inset-0 left-auto right-5 flex items-center',
+              { 'cursor-pointer': !!onIconClick },
+              { 'pointer-events-none': !onIconClick },
+            )}
+          >
+            <Icon icon={icon} fontSize={22} />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "resourceNameTruncated": "soccer530cfdb7",
-    "userPoolName": "soccerbetapp530cfdb7_userpool_530cfdb7",
+    "resourceNameTruncated": "soccer8629f053",
+    "userPoolName": "users",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -18,49 +18,40 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-      "email"
+      "email",
+      "nickname"
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": "10",
     "userpoolClientWriteAttributes": [
-      "email"
+      "email",
+      "nickname"
     ],
     "userpoolClientReadAttributes": [
-      "email"
+      "email",
+      "nickname"
     ],
-    "userpoolClientLambdaRole": "soccer530cfdb7_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": false,
-    "sharedId": "530cfdb7",
-    "resourceName": "soccerbetapp530cfdb7",
+    "userpoolClientLambdaRole": "soccer8629f053_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": true,
+    "sharedId": "8629f053",
+    "resourceName": "soccerappauth",
     "authSelections": "userPoolOnly",
     "useDefault": "manual",
-    "userPoolGroupList": [],
+    "userPoolGroups": true,
+    "adminQueries": false,
+    "triggers": {
+      "PostConfirmation": [
+        "add-to-group"
+      ]
+    },
+    "hostedUI": false,
+    "userPoolGroupList": [
+      "default",
+      "admin"
+    ],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
-    "useEnabledMfas": true,
-    "authRoleArn": {
-      "Fn::GetAtt": [
-        "AuthRole",
-        "Arn"
-      ]
-    },
-    "unauthRoleArn": {
-      "Fn::GetAtt": [
-        "UnauthRole",
-        "Arn"
-      ]
-    },
-    "breakCircularDependency": true,
-    "dependsOn": [],
-    "userPoolGroups": false,
-    "adminQueries": false,
-    "triggers": {},
-    "hostedUI": false,
-    "authProviders": [],
-    "parentStack": {
-      "Ref": "AWS::StackId"
-    },
-    "permissions": []
+    "useEnabledMfas": true
   }
 }

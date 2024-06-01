@@ -9,11 +9,20 @@
       "UnauthRoleName": "amplify-soccerbetapp-devnew-12657-unauthRole",
       "StackName": "amplify-soccerbetapp-devnew-12657",
       "StackId": "arn:aws:cloudformation:eu-central-1:905418203508:stack/amplify-soccerbetapp-devnew-12657/9ba911b0-1d81-11ef-957f-0ae25a50374b",
-      "AmplifyAppId": "d384ow5stj6k9w"
+      "AmplifyAppId": "d384ow5stj6k9w",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-soccerbetapp-devnew-12657-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
-        "soccerbetapp530cfdb7": {}
+        "soccerappauth": {},
+        "userPoolGroups": {}
+      },
+      "function": {
+        "soccerappauthPostConfirmation": {
+          "GROUP": "default",
+          "deploymentBucketName": "amplify-soccerbetapp-devnew-12657-deployment",
+          "s3Key": "amplify-builds/soccerappauthPostConfirmation-436334314a435941344b-build.zip"
+        }
       }
     }
   }
