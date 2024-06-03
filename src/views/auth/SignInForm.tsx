@@ -64,7 +64,11 @@ export default function SignInForm() {
           </div>
 
           <div className="mb-5">
-            <Button type="submit" label="Sign In" />
+            <Button
+              type="submit"
+              disabled={formik.isSubmitting}
+              label="Sign In"
+            />
           </div>
 
           <div className="mt-6 flex justify-between">

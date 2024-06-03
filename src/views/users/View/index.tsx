@@ -1,6 +1,8 @@
 'use client';
 import { PaginationState } from '@tanstack/table-core';
 
+import { useAuthContext } from '@/contexts/Auth';
+
 import { useColumnData } from '@/views/users/useColumnData';
 
 import Table from '@/components/table/Table';
@@ -16,6 +18,7 @@ interface UsersViewProps {
 
 export default function UsersView({ data, metadata }: UsersViewProps) {
   const columns = useColumnData();
+  const { user } = useAuthContext();
 
   const handlePaginationChange = (pagination: PaginationState) => {
     console.log(pagination);

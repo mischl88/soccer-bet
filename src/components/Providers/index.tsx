@@ -1,18 +1,20 @@
 'use client';
 
-import { redirect, usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { PropsWithChildren, useEffect, useState } from 'react';
+
+import { Amplify, Auth } from 'aws-amplify';
 
 import { SidebarContext } from '@/contexts/Sidebar';
 import { AuthContext, AuthContextType } from '@/contexts/Auth';
 
-import Loader from '@/components/Loader';
+import awsConfig from './../../aws-exports';
 
-import { useRequest } from '@/hooks/useRequest';
-
-import API_ROUTES from '@/config/apiRoutes';
 import { ROUTES } from '@/config/routes';
+
+Amplify.configure(awsConfig);
+Auth.configure(awsConfig);
 
 interface ProvidersProps extends PropsWithChildren {
   redirectOnMissingUser?: boolean;
@@ -26,18 +28,23 @@ export default function Providers({
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [user, setUser] = useState<AuthContextType['user'] | null>(null);
-  // const { data: userData, isLoading, error } = useRequest<User>(API_ROUTES.ME);
-  //
-  // useEffect(() => {
-  //   if (!user && userData) {
-  //     setUser(userData);
-  //     pathname.includes('auth') && push('/');
-  //   }
-  // }, [userData, push, pathname, user]);
-  //
-  // if (!isLoading && !userData && redirectOnMissingUser) {
-  //   redirect(ROUTES.SIGN_IN);
-  // }
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const currentUser = await Auth.currentAuthenticatedUser();
+        if (currentUser) {
+          setUser(currentUser);
+          pathname.includes('auth') && push('/');
+        }
+      } catch {
+        if (redirectOnMissingUser) {
+          push(ROUTES.SIGN_IN);
+        }
+      }
+    };
+    getUser();
+  }, [redirectOnMissingUser, pathname, push]);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>

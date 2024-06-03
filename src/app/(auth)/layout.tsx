@@ -1,21 +1,13 @@
 import { ReactNode } from 'react';
 
-import { Amplify, Auth } from 'aws-amplify';
 import { DM_Sans } from 'next/font/google';
 
 import AuthTemplate from '@/layouts/AuthLayout';
-
-import awsConfig from './../../aws-exports';
 
 import Providers from '@/components/Providers';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 import '@/styles/App.css';
-
-Amplify.configure({
-  ...awsConfig,
-});
-Auth.configure({ ...awsConfig });
 
 const dMSans = DM_Sans({
   subsets: ['latin'],

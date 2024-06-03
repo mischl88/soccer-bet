@@ -1,17 +1,19 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import { useEffect, useRef, useState } from 'react';
 
 import clsx from 'clsx';
 import { Icon } from '@iconify/react';
+import { Auth } from 'aws-amplify';
 
 import { useAuthContext } from '@/contexts/Auth';
 
 const DropdownUser = () => {
+  const { push } = useRouter();
   const { user } = useAuthContext();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
 
@@ -47,6 +49,11 @@ const DropdownUser = () => {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
+  const handleLogout = async () => {
+    await Auth.signOut();
+    push('/');
+  };
+
   return (
     <div className="relative">
       <Link
@@ -57,7 +64,7 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-bodydark1">
-            {/*{user?.username}*/}
+            {user?.getUsername()}
           </span>
         </span>
 
@@ -110,7 +117,11 @@ const DropdownUser = () => {
             </Link>
           </li>
         </ul>
-        <button className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+        >
           <Icon icon="tabler:logout-2" fontSize={23} />
           Log Out
         </button>

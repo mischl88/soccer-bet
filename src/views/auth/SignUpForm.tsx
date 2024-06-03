@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 import { useFormik, FormikProvider } from 'formik';
 import { Auth } from 'aws-amplify';
+import clsx from 'clsx';
 
 import Wrapper from '@/views/auth/Wrapper';
 
@@ -17,6 +19,7 @@ import PasswordInput from '@/components/Form/PasswordInput';
 import { ROUTES } from '@/config/routes';
 
 export default function SignUpForm() {
+  const [showCode, setShowCode] = useState(false);
   const { push } = useRouter();
 
   const formik = useFormik({
@@ -25,10 +28,23 @@ export default function SignUpForm() {
       email: '',
       password: '',
       confirmPassword: '',
+      code: '',
     },
-    onSubmit: async ({ email, ...values }) => {
-      await Auth.signUp({ ...values, attributes: { email } });
-      push(ROUTES.SIGN_IN);
+    onSubmit: async ({ email, code, confirmPassword, ...values }) => {
+      try {
+        if (showCode) {
+          await Auth.confirmSignUp(values.username, code);
+          push(ROUTES.SIGN_IN);
+          return;
+        }
+        await Auth.signUp({ ...values, attributes: { email } });
+        setShowCode(true);
+        toast.success(
+          'Thank you for signing up! A verification code has been sent to your email. Please check your inbox to complete your registration.',
+        );
+      } catch (error: any) {
+        toast.error(error.message);
+      }
     },
   });
 
@@ -63,7 +79,7 @@ export default function SignUpForm() {
             />
           </div>
 
-          <div className="mb-6">
+          <div className={clsx({ 'mb-6': !showCode, 'mb-4': showCode })}>
             <PasswordInput
               label="Re-type Password"
               placeholder="Re-enter your password"
@@ -71,8 +87,24 @@ export default function SignUpForm() {
             />
           </div>
 
+          {showCode && (
+            <div className="mb-6">
+              <InputField
+                label="Verification code"
+                type="text"
+                name="code"
+                placeholder="Enter your verification code"
+                icon="tabler:shield-check-filled"
+              />
+            </div>
+          )}
+
           <div className="mb-5">
-            <Button type="submit" label="Create account" />
+            <Button
+              type="submit"
+              disabled={formik.isSubmitting}
+              label={showCode ? 'Confirm code' : 'Create account'}
+            />
           </div>
           <div className="mt-6 text-center">
             <p>
