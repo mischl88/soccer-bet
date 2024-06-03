@@ -36,8 +36,8 @@ export default function SignInForm() {
         });
         setUser(user);
         push('/');
-      } catch (error: any) {
-        toast.error(error.message);
+      } catch {
+        toast.error('Incorrect username or password. Please try again.');
       }
     },
   });
@@ -51,7 +51,7 @@ export default function SignInForm() {
               label="Username"
               name="username"
               placeholder="Enter your username"
-              icon="mdi:envelope-outline"
+              icon="tabler:user"
             />
           </div>
 

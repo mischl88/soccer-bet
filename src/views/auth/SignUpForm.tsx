@@ -12,7 +12,7 @@ import clsx from 'clsx';
 
 import Wrapper from '@/views/auth/Wrapper';
 
-import InputField from '@/components/Form/Input';
+import Input from '@/components/Form/Input';
 import Button from '@/components/Button';
 import PasswordInput from '@/components/Form/PasswordInput';
 
@@ -53,7 +53,7 @@ export default function SignUpForm() {
       <FormikProvider value={formik}>
         <form onSubmit={formik.handleSubmit}>
           <div className="mb-4">
-            <InputField
+            <Input
               label="Name"
               name="username"
               placeholder="Enter your username"
@@ -62,7 +62,7 @@ export default function SignUpForm() {
           </div>
 
           <div className="mb-4">
-            <InputField
+            <Input
               label="Email"
               type="email"
               name="email"
@@ -89,7 +89,7 @@ export default function SignUpForm() {
 
           {showCode && (
             <div className="mb-6">
-              <InputField
+              <Input
                 label="Verification code"
                 type="text"
                 name="code"

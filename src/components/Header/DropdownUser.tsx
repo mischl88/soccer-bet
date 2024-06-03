@@ -10,6 +10,8 @@ import { Auth } from 'aws-amplify';
 
 import { useAuthContext } from '@/contexts/Auth';
 
+import { ROUTES } from '@/config/routes';
+
 const DropdownUser = () => {
   const { push } = useRouter();
   const { user } = useAuthContext();
@@ -51,7 +53,7 @@ const DropdownUser = () => {
 
   const handleLogout = async () => {
     await Auth.signOut();
-    push('/');
+    push(ROUTES.SIGN_IN);
   };
 
   return (

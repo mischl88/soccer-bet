@@ -19,7 +19,7 @@ export default function Button({
       disabled={isLoading || disabled}
       {...rest}
     >
-      {isLoading || disabled ? <Loader /> : label}
+      {isLoading || disabled ? <Loader className="text-white" /> : label}
     </button>
   );
 }

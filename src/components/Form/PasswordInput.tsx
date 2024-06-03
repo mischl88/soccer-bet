@@ -24,7 +24,7 @@ export default function PasswordInput<Values extends object>({
       onChange={handleChange}
       name={name as string | undefined}
       value={name && values[name]}
-      icon="tabler:lock"
+      icon={show ? 'tabler:lock-open' : 'tabler:lock'}
       onIconClick={handleClick}
       type={show ? 'text' : 'password'}
     />

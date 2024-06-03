@@ -1,6 +1,7 @@
 'use client';
 
 import { PropsWithChildren } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
@@ -23,6 +24,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
           </main>
         </div>
       </div>
+      <ToastContainer position="top-center" />
     </div>
   );
 }

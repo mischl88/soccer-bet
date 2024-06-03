@@ -15,7 +15,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
           </main>
         </div>
       </div>
-      <ToastContainer />
+      <ToastContainer position="top-center" />
     </div>
   );
 }
