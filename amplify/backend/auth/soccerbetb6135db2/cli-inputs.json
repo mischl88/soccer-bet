@@ -1,8 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "resourceNameTruncated": "soccer8629f053",
-    "userPoolName": "users",
+    "identityPoolName": "soccerbetb6135db2_identitypool_b6135db2",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "soccerb6135db2",
+    "userPoolName": "soccerbetb6135db2_userpool_b6135db2",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -18,38 +20,24 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-      "email",
-      "nickname"
+      "email"
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
-    "userpoolClientRefreshTokenValidity": "10",
+    "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
-      "email",
-      "nickname"
+      "email"
     ],
     "userpoolClientReadAttributes": [
-      "email",
-      "nickname"
+      "email"
     ],
-    "userpoolClientLambdaRole": "soccer8629f053_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": true,
-    "sharedId": "8629f053",
-    "resourceName": "soccerappauth",
-    "authSelections": "userPoolOnly",
-    "useDefault": "manual",
-    "userPoolGroups": true,
-    "adminQueries": false,
-    "triggers": {
-      "PostConfirmation": [
-        "add-to-group"
-      ]
-    },
-    "hostedUI": false,
-    "userPoolGroupList": [
-      "default",
-      "admin"
-    ],
+    "userpoolClientLambdaRole": "soccerb6135db2_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": false,
+    "sharedId": "b6135db2",
+    "resourceName": "soccerbetb6135db2",
+    "authSelections": "identityPoolAndUserPool",
+    "useDefault": "default",
+    "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
     "useEnabledMfas": true
